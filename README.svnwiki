@@ -2,7 +2,7 @@
 === Abstract
 The named-let incarnation of the let form has two slight inconsistencies with the define form. As defined, the let form makes no accommodation for rest arguments, an issue of functionality and consistency. As defined, the let form does not accommodate signature-style syntax, an issue of aesthetics and consistency. Both issues are addressed here in a manner which is compatible with the traditional let form but for minor extensions.
 
-For more information see: [[https://srfi.schemers.org/srfi-5/][SRFI-5: A compatible let form with signatures and rest arguments]]
+For more information see: [[https://srfi.schemers.org/srfi-5/|SRFI-5: A compatible let form with signatures and rest arguments]]
 === Rationale
 Signature-style Syntax
 
@@ -133,7 +133,7 @@ Let $lambda and $letrec be hygienic bindings for the lambda and letrec forms, re
 </enscript>
 === Author
  * Andy Gaynor
- * Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber][Sergey Goldgaber]]
+ * Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber|Sergey Goldgaber]]
 === Copyright
 Copyright (C) Andy Gaynor (1999). All Rights Reserved.
 
@@ -143,6 +143,6 @@ The limited permissions granted above are perpetual and will not be revoked by t
 
 This document and the information contained herein is provided on an "AS IS" basis and THE AUTHOR AND THE SRFI EDITORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
 === Source code
- * The source code for this egg can be found: [[https://github.com/diamond-lizard/srfi-5][here]]
+ * The source code for this egg can be found: [[https://github.com/diamond-lizard/srfi-5|here]]
 === Version history
  * 0.1 - Ported to Chicken Scheme 5
