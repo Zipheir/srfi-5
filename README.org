@@ -8,6 +8,7 @@ Signature-style Syntax
 
 Consider the following two equivalent definitions:
 
+#+BEGIN_SRC scheme
 (define fibonacci
   (lambda (n i f0 f1)
     (if (= i n)
@@ -18,44 +19,45 @@ Consider the following two equivalent definitions:
   (if (= i n)
     f0
     (fibonacci n (+ i 1) f1 (+ f0 f1))))
+#+END_SRC
 
-Although there is a named-let analog for the former form, there is none for the
-latter. To wit, suppose one wished to compute the 10th element of the Fibonacci
-sequence using a named let:
+Although there is a named-let analog for the former form, there is none for the latter. To wit, suppose one wished to compute the 10th element of the Fibonacci sequence using a named let:
 
+#+BEGIN_SRC scheme
 (let fibonacci ((n 10) (i 0) (f0 0) (f1 1))
   (if (= i n)
     f0
     (fibonacci n (+ i 1) f1 (+ f0 f1))))
+#+END_SRC
 Values: 55
 
 As it stands, one cannot equivalently write
 
+#+BEGIN_SRC scheme
 (let (fibonacci (n 10) (i 0) (f0 0) (f1 1))
   (if (= i n)
     f0
     (fibonacci n (+ i 1) f1 (+ f0 f1))))
+#+END_SRC
 
 which is consistent with define's signature-style form.
 
-Those that favor the signature style may prefer this extension. In any case, it may
-be more appropriate to include all bound names within the binding section. As
-presented, this straightforward extension introduces no ambiguity or incompatibility
-with the existing definition of let.
-
-Rest Arguments
-
+Those that favor the signature style may prefer this extension. In any case, it may be more appropriate to include all bound names within the binding section. As presented, this straightforward extension introduces no ambiguity or incompatibility with the existing definition of let.
+** Rest Arguments
 As it stands, one cannot write a named let with rest arguments, as in
 
+#+BEGIN_SRC scheme
 (let (blast (port (current-output-port)) . (x (+ 1 2) 4 5))
   (if (null? x)
     'just-a-silly-contrived-example
     (begin
       (write (car x) port)
       (apply blast port (cdr x)))))
+#+END_SRC
 
 otherwise equivalent to
 
+#+BEGIN_SRC scheme
 (letrec ((blast (lambda (port . x)
           (if (null? x)
               'just-a-silly-contrived-example
@@ -63,31 +65,19 @@ otherwise equivalent to
             (write (car x) port)
             (apply blast port (cdr x)))))))
   (blast (current-output-port) (+ 1 2) 4 5))
+#+END_SRC
 
-While this example is rather contrived, the functionality is not. There are several
-times when the author has used this construct in practice. Regardless, there is
-little reason to deny the let form access to all the features of lambda
-functionality.
+While this example is rather contrived, the functionality is not. There are several times when the author has used this construct in practice. Regardless, there is little reason to deny the let form access to all the features of lambda functionality.
+** Symbols in Binding Sections
+Both the features above rely upon the placement of symbols in let binding lists (this statement is intentially simplistic). The only other apparent use of such symbol placement is to tersely bind variables to unspecified values. For example, one might desire to use (let (foo bar baz) ...) to bind foo, bar, and baz to unspecified values.
 
-Symbols in Binding Sections
-
-Both the features above rely upon the placement of symbols in let binding lists
-(this statement is intentially simplistic). The only other apparent use of such
-symbol placement is to tersely bind variables to unspecified values. For example,
-one might desire to use (let (foo bar baz) ...) to bind foo, bar, and baz to
-unspecified values.
-
-This usage is considered less important in light of the rationales presented above,
-and an alternate syntax is immediately apparent, as in (let ((foo) (bar) (baz)) ...)
-This may even be preferable, consistently parenthesizing normal binding clauses.
-
-Specification
-
-Syntax
-
+This usage is considered less important in light of the rationales presented above, and an alternate syntax is immediately apparent, as in (let ((foo) (bar) (baz)) ...) This may even be preferable, consistently parenthesizing normal binding clauses.
+** Specification
+*** Syntax
 A formal specification of the syntax follows. Below, body, expression, and
 identifier are free. Each instantiation of binding-name must be unique.
 
+#+BEGIN_EXAMPLE
             let = "(" "let" let-bindings body ")"
     expressions = nothing | expression expressions
    let-bindings = let-name bindings
@@ -101,63 +91,50 @@ normal-bindings = nothing
  normal-binding = "(" binding-name expression ")"
    binding-name = identifier
    rest-binding = "(" binding-name expressions ")"
+#+END_EXAMPLE
 
 For clarity and convenience, an informal specification follows.
+**** 1. Unnamed
+(let ((<parameter> <argument>)...)
+  <body>...)
+**** 2. Named, non-signature-style, no rest argument
+(let <name> ((<parameter> <argument>)...)
+  <body>...)
+**** 3. Named, signature-style, no rest argument
+(let (<name> (<parameter> <argument>)...)
+  <body>...)
+**** 4. Named, non-signature-style, rest argument
+(let <name> ((<parameter> <argument>)...
 
- 1. Unnamed
+. (<rest-parameter> <rest-argument>...))
+  <body>...)
+**** 5. Named, signature-style, rest argument
+(let (<name> (<parameter> <argument>)...
 
-    (let ((<parameter> <argument>)...)
-      <body>...)
+. (<rest-parameter> <rest-argument>...))
+  <body>...)
+*** Semantics
+Let $lambda and $letrec be hygienic bindings for the lambda and letrec forms, respectively.
+**** For informal syntax 1:
+#+BEGIN_SRC scheme
+(($lambda (<parameter>...) <body>...) <argument>...)
+#+END_SRC
+**** For informal syntaxes 2 and 3:
+#+BEGIN_SRC scheme
+($letrec ((<name> ($lambda (<parameter>...) <body>...)))
+  (<name> <argument>...))
+#+END_SRC
+**** For informal syntaxes 4 and 5:
+#+BEGIN_SRC scheme
+($letrec ((<name> ($lambda (<parameter>...
 
- 2. Named, non-signature-style, no rest argument
-
-    (let <name> ((<parameter> <argument>)...)
-      <body>...)
-
- 3. Named, signature-style, no rest argument
-
-    (let (<name> (<parameter> <argument>)...)
-      <body>...)
-
- 4. Named, non-signature-style, rest argument
-
-    (let <name> ((<parameter> <argument>)...
-
-    . (<rest-parameter> <rest-argument>...))
-      <body>...)
-
- 5. Named, signature-style, rest argument
-
-    (let (<name> (<parameter> <argument>)...
-
-    . (<rest-parameter> <rest-argument>...))
-      <body>...)
-
-Semantics
-
-Let $lambda and $letrec be hygienic bindings for the lambda and letrec forms,
-respectively.
-
-  * For informal syntax 1:
-
-    (($lambda (<parameter>...) <body>...) <argument>...)
-
-  * For informal syntaxes 2 and 3:
-
-    ($letrec ((<name> ($lambda (<parameter>...) <body>...)))
-      (<name> <argument>...))
-
-  * For informal syntaxes 4 and 5:
-
-    ($letrec ((<name> ($lambda (<parameter>...
-
-    . <rest-parameter>) <body>...)))
-      (<name> <argument>... <rest-argument>...))
-
-Implementation
-
+. <rest-parameter>) <body>...)))
+  (<name> <argument>... <rest-argument>...))
+#+END_SRC
+** Implementation
 Here is an implementation using SYNTAX-RULES.
 
+#+BEGIN_SRC scheme
 ;; Use your own standard let.
 ;; Or call a lambda.
 ;; (define-syntax standard-let
@@ -224,6 +201,7 @@ Here is an implementation using SYNTAX-RULES.
      ((letrec ((name (lambda (var ... . rest-var) . body)))
         name)
       val ... rest-val ...))))
+#+END_SRC
 ** Author
  * Andy Gaynor
  * Ported to Chicken Scheme 5 by Sergey Goldgaber
