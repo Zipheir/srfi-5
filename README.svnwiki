@@ -93,24 +93,34 @@ identifier are free. Each instantiation of binding-name must be unique.
 
 For clarity and convenience, an informal specification follows.
 ===== 1. Unnamed
+<enscript highlight="scheme">
 (let ((<parameter> <argument>)...)
   <body>...)
+</enscript>
 ===== 2. Named, non-signature-style, no rest argument
+<enscript highlight="scheme">
 (let <name> ((<parameter> <argument>)...)
   <body>...)
+</enscript>
 ===== 3. Named, signature-style, no rest argument
+<enscript highlight="scheme">
 (let (<name> (<parameter> <argument>)...)
   <body>...)
+</enscript>
 ===== 4. Named, non-signature-style, rest argument
+<enscript highlight="scheme">
 (let <name> ((<parameter> <argument>)...
 
 . (<rest-parameter> <rest-argument>...))
   <body>...)
+</enscript>
 ===== 5. Named, signature-style, rest argument
+<enscript highlight="scheme">
 (let (<name> (<parameter> <argument>)...
 
 . (<rest-parameter> <rest-argument>...))
   <body>...)
+</enscript>
 ==== Semantics
 Let {{$lambda}} and {{$letrec}} be hygienic bindings for the {{lambda}} and {{letrec}} forms, respectively.
 ===== For informal syntax 1:
