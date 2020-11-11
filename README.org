@@ -225,8 +225,8 @@ Here is an implementation using SYNTAX-RULES.
         name)
       val ... rest-val ...))))
 ** Author
-*** Andy Gaynor
-*** Ported to Chicken Scheme 5 by Sergey Goldgaber
+ * Andy Gaynor
+ * Ported to Chicken Scheme 5 by Sergey Goldgaber
 ** Copyright
 Copyright (C) Andy Gaynor (1999). All Rights Reserved.
 
@@ -235,5 +235,7 @@ This document and translations of it may be copied and furnished to others, and 
 The limited permissions granted above are perpetual and will not be revoked by the authors or their successors or assigns.
 
 This document and the information contained herein is provided on an "AS IS" basis and THE AUTHOR AND THE SRFI EDITORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+** Source code
+ * The source code for this egg can be found: [[https://github.com/diamond-lizard/srfi-5][here]]
 ** Version history
-*** 0.1 - Ported to Chicken Scheme 5
+ * 0.1 - Ported to Chicken Scheme 5
