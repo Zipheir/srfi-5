@@ -77,21 +77,19 @@ This usage is considered less important in light of the rationales presented abo
 A formal specification of the syntax follows. Below, body, expression, and
 identifier are free. Each instantiation of binding-name must be unique.
 
-#+BEGIN_EXAMPLE
-            let = "(" "let" let-bindings body ")"
-    expressions = nothing | expression expressions
-   let-bindings = let-name bindings
-                | "(" let-name "." bindings ")"
-       let-name = identifier
-       bindings = "(" ")"
-                | rest-binding
-                | "(" normal-bindings ["." rest-binding] ")"
-normal-bindings = nothing
-                | normal-binding normal-bindings
- normal-binding = "(" binding-name expression ")"
-   binding-name = identifier
-   rest-binding = "(" binding-name expressions ")"
-#+END_EXAMPLE
+             let = "(" "let" let-bindings body ")"
+     expressions = nothing | expression expressions
+    let-bindings = let-name bindings
+                 | "(" let-name "." bindings ")"
+        let-name = identifier
+        bindings = "(" ")"
+                 | rest-binding
+                 | "(" normal-bindings ["." rest-binding] ")"
+ normal-bindings = nothing
+                 | normal-binding normal-bindings
+  normal-binding = "(" binding-name expression ")"
+    binding-name = identifier
+    rest-binding = "(" binding-name expressions ")"
 
 For clarity and convenience, an informal specification follows.
 ===== 1. Unnamed
