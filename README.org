@@ -133,7 +133,7 @@ Let $lambda and $letrec be hygienic bindings for the lambda and letrec forms, re
 #+END_SRC
 ** Author
  * Andy Gaynor
- * Ported to Chicken Scheme 5 by Sergey Goldgaber
+ * Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber][Sergey Goldgaber]]
 ** Copyright
 Copyright (C) Andy Gaynor (1999). All Rights Reserved.
 
