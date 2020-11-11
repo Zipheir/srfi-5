@@ -140,8 +140,8 @@ Let {{$lambda}} and {{$letrec}} be hygienic bindings for the {{lambda}} and {{le
   (<name> <argument>... <rest-argument>...))
 </enscript>
 === Author
- * Andy Gaynor
- * Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber|Sergey Goldgaber]]
+* Andy Gaynor
+* Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber|Sergey Goldgaber]]
 === Copyright
 Copyright (C) Andy Gaynor (1999). All Rights Reserved.
 
@@ -151,6 +151,6 @@ The limited permissions granted above are perpetual and will not be revoked by t
 
 This document and the information contained herein is provided on an "AS IS" basis and THE AUTHOR AND THE SRFI EDITORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
 === Source code
- * The source code for this egg can be found: [[https://github.com/diamond-lizard/srfi-5|here]]
+* The source code for this egg can be found: [[https://github.com/diamond-lizard/srfi-5|here]]
 === Version history
- * 0.1 - Ported to Chicken Scheme 5
+* 0.1 - Ported to Chicken Scheme 5
