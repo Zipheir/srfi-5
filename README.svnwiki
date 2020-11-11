@@ -69,9 +69,9 @@ otherwise equivalent to
 
 While this example is rather contrived, the functionality is not. There are several times when the author has used this construct in practice. Regardless, there is little reason to deny the let form access to all the features of lambda functionality.
 === Symbols in Binding Sections
-Both the features above rely upon the placement of symbols in let binding lists (this statement is intentially simplistic). The only other apparent use of such symbol placement is to tersely bind variables to unspecified values. For example, one might desire to use (let (foo bar baz) ...) to bind foo, bar, and baz to unspecified values.
+Both the features above rely upon the placement of symbols in let binding lists (this statement is intentially simplistic). The only other apparent use of such symbol placement is to tersely bind variables to unspecified values. For example, one might desire to use {{(let (foo bar baz) ...)}} to bind foo, bar, and baz to unspecified values.
 
-This usage is considered less important in light of the rationales presented above, and an alternate syntax is immediately apparent, as in (let ((foo) (bar) (baz)) ...) This may even be preferable, consistently parenthesizing normal binding clauses.
+This usage is considered less important in light of the rationales presented above, and an alternate syntax is immediately apparent, as in {{(let ((foo) (bar) (baz)) ...)}} This may even be preferable, consistently parenthesizing normal binding clauses.
 === Specification
 ==== Syntax
 A formal specification of the syntax follows. Below, body, expression, and
@@ -114,7 +114,7 @@ For clarity and convenience, an informal specification follows.
 . (<rest-parameter> <rest-argument>...))
   <body>...)
 ==== Semantics
-Let $lambda and $letrec be hygienic bindings for the lambda and letrec forms, respectively.
+Let {{$lambda}} and {{$letrec}} be hygienic bindings for the {{lambda}} and {{letrec}} forms, respectively.
 ===== For informal syntax 1:
 <enscript highlight="scheme">
 (($lambda (<parameter>...) <body>...) <argument>...)
