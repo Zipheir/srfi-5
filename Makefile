@@ -7,7 +7,7 @@ SALMONELLA_LOG_VIEWER	:= salmonella-log-viewer
 SRFI   			:= srfi-5.scm
 TEST_NEW_EGG		:= test-new-egg
 
-all: test
+all: compile
 
 clean:
 	$(CHICKEN_CLEAN)
@@ -18,9 +18,6 @@ compile:
 
 salmonella:
 	$(SALMONELLA)
-
-test:
-	$(CHICKEN_INSTALL) -test
 
 test_new_egg:
 	$(TEST_NEW_EGG)
