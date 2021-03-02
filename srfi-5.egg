@@ -1,7 +1,7 @@
 ((author "Andy Gaynor")
  (maintainer "Wolfgang Corcoran-Mathe")
  (synopsis "SRFI-5: A compatible let form with signatures and rest arguments")
- (version "0.2")
+ (version "0.3")
  (category lang-exts)
  (test-dependencies test)
  (license "MIT")
