@@ -1,7 +1,5 @@
-;;; srfi-5.egg -*- Scheme -*- vim: ft=scheme:
-
 ((author "Andy Gaynor")
- (maintainer "Sergey Goldgaber")
+ (maintainer "Wolfgang Corcoran-Mathe")
  (synopsis "SRFI-5: A compatible let form with signatures and rest arguments")
  (version "0.2")
  (category lang-exts)
