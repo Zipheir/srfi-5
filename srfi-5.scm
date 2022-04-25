@@ -1,11 +1,9 @@
-(module srfi-5 ()
-  (import (rename scheme (let standard-let)))
-  (import (chicken base))
-  (import (chicken module))
-  (import (chicken platform))
-  (export let
-          let-loop)
+(module srfi-5 (let)
+  (import (rename scheme (let standard-let))
+          (chicken base)
+          (chicken platform))
 
   (register-feature! 'srfi-5)
 
-  (include "srfi-5-impl.scm"))
+  (include "srfi-5-impl.scm")
+  )
