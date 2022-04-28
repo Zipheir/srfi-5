@@ -146,7 +146,8 @@ Contact: {{wcm at sigwinch dot xyzzy without the zy}}
 ; 0.1 : (2020-11-11) Ported to Chicken Scheme 5 (Sergey Goldgaber).
 ; 0.2 : (2020-11-16) Fixed broken egg file name (Sergey Goldgaber).
 ; 0.3 : (2022-04-25) Change maintainer, fix import.
-; 0.3.1 : (2022-04-27) Add tests, rewrite wiki page.
+; 0.3.1 : (2022-04-26) Egg infrastructure fixes.
+; 0.3.2 : (2022-04-29) Add tests, rework wiki page.
 
 === Copyright
 
