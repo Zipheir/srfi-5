@@ -1,111 +1,152 @@
 == SRFI-5: A compatible let form with signatures and rest arguments
 
-For more information see: [[https://srfi.schemers.org/srfi-5/|SRFI-5: A compatible let form with signatures and rest arguments]]
+This egg extends the syntax of {{let}} to allow {{define}}-like named
+let forms with optional "rest" arguments.
+
+[[toc:]]
+
+== SRFI description
+
+This page is intended to document the forms exported by the egg.  For
+a full description of SRFI 5, see
+[[https://srfi.schemers.org/srfi-5/srfi-5.html|the SRFI document]].
+
+== Specification
+
+=== Signature-style syntax
+
+Using the {{let}} form provided by this egg, the following
+
+<enscript highlight="scheme">
+(let (fibonacci (n 10) (i 0) (f0 0) (f1 1))
+  (if (= i n)
+      f0
+      (fibonacci n (+ i 1) f1 (+ f0 f1))))
+</enscript>
+
+is equivalent to
+
+<enscript highlight="scheme">
+(let fibonacci ((n 10) (i 0) (f0 0) (f1 1))
+  (if (= i n)
+      f0
+      (fibonacci n (+ i 1) f1 (+ f0 f1))))
+</enscript>
 
 === Rest Arguments
 
-As it stands, one cannot write a named let with rest arguments, as in
+This egg allows named let forms with rest parameters.  For example,
 
 <enscript highlight="scheme">
 (let (blast (port (current-output-port)) . (x (+ 1 2) 4 5))
   (if (null? x)
-    'just-a-silly-contrived-example
-    (begin
-      (write (car x) port)
-      (apply blast port (cdr x)))))
+      'just-a-silly-contrived-example
+      (begin
+        (write (car x) port)
+        (apply blast port (cdr x)))))
 </enscript>
 
-otherwise equivalent to
+is equivalent to
 
 <enscript highlight="scheme">
-(letrec ((blast (lambda (port . x)
-          (if (null? x)
-              'just-a-silly-contrived-example
-              (begin
-            (write (car x) port)
-            (apply blast port (cdr x)))))))
+(letrec ((blast
+          (lambda (port . x)
+            (if (null? x)
+                'just-a-silly-contrived-example
+                (begin
+                 (write (car x) port)
+                 (apply blast port (cdr x)))))))
   (blast (current-output-port) (+ 1 2) 4 5))
 </enscript>
 
-While this example is rather contrived, the functionality is
-not. There are several times when the author has used this construct in
-practice. Regardless, there is little reason to deny the let form access
-to all the features of lambda functionality.
+Note: Users of this feature should be aware of the potential for space
+leaks.  In the above snippet, for example, the list denoted by ''x''
+will be newly allocated on each recursive call.
 
-=== Symbols in Binding Sections
+=== Syntax
 
-=== Specification
-
-===== 1. Unnamed
+==== 1. Unnamed
 
 <enscript highlight="scheme">
 (let ((<parameter> <argument>)...)
   <body>...)
 </enscript>
 
-===== 2. Named, non-signature-style, no rest argument
+==== 2. Named, non-signature-style, no rest argument
 
 <enscript highlight="scheme">
 (let <name> ((<parameter> <argument>)...)
   <body>...)
 </enscript>
 
-===== 3. Named, signature-style, no rest argument
+==== 3. Named, signature-style, no rest argument
 
 <enscript highlight="scheme">
 (let (<name> (<parameter> <argument>)...)
   <body>...)
 </enscript>
 
-===== 4. Named, non-signature-style, rest argument
+==== 4. Named, non-signature-style, rest argument
 
-<enscript highlight="scheme">
-(let <name> ((<parameter> <argument>)...
-
-. (<rest-parameter> <rest-argument>...))
+<enscript highlight="scheme>
+(let <name> ((<parameter> <argument>)... . (<rest-parameter> <rest-argument>...))
   <body>...)
 </enscript>
 
-===== 5. Named, signature-style, rest argument
+==== 5. Named, signature-style, rest argument
 
 <enscript highlight="scheme">
-(let (<name> (<parameter> <argument>)...
-
-. (<rest-parameter> <rest-argument>...))
+(let (<name> (<parameter> <argument>)... . (<rest-parameter> <rest-argument>...))
   <body>...)
 </enscript>
 
-==== Semantics
+=== Semantics
 
 Let {{$lambda}} and {{$letrec}} be hygienic bindings for the {{lambda}}
 and {{letrec}} forms, respectively.
 
-===== For informal syntax 1:
+For informal syntax 1:
 
 <enscript highlight="scheme">
 (($lambda (<parameter>...) <body>...) <argument>...)
 </enscript>
 
-===== For informal syntaxes 2 and 3:
+For informal syntaxes 2 and 3:
 
 <enscript highlight="scheme">
 ($letrec ((<name> ($lambda (<parameter>...) <body>...)))
   (<name> <argument>...))
 </enscript>
 
-===== For informal syntaxes 4 and 5:
+For informal syntaxes 4 and 5:
 
 <enscript highlight="scheme">
-($letrec ((<name> ($lambda (<parameter>...
-
-. <rest-parameter>) <body>...)))
+($letrec ((<name> ($lambda (<parameter>... . <rest-parameter>) <body>...)))
   (<name> <argument>... <rest-argument>...))
 </enscript>
 
+== About this egg
+
 === Author
 
-* Andy Gaynor
-* Ported to Chicken Scheme 5 by [[https://wiki.call-cc.org/users/sergey-goldgaber|Sergey Goldgaber]]
+Andy Gaynor
+
+=== Maintainer
+
+Wolfgang Corcoran-Mathe
+
+Contact: {{wcm at sigwinch dot xyzzy without the zy}}
+
+=== Repository
+
+[[https://github.com/Zipheir/srfi-5|GitHub]]
+
+=== Version history
+
+; 0.1 : (2020-11-11) Ported to Chicken Scheme 5 (Sergey Goldgaber).
+; 0.2 : (2020-11-16) Fixed broken egg file name (Sergey Goldgaber).
+; 0.3 : (2022-04-25) Change maintainer, fix import.
+; 0.3.1 : (2022-04-27) Add tests, rewrite wiki page.
 
 === Copyright
 
@@ -131,7 +172,3 @@ IS" basis and THE AUTHOR AND THE SRFI EDITORS DISCLAIM ALL WARRANTIES,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE
 USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
 WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-
-=== Version history
-
-* 0.1 - Ported to Chicken Scheme 5
