@@ -1,4 +1,4 @@
-== SRFI-5: A compatible let form with signatures and rest arguments
+== SRFI 5: A compatible let form with signatures and rest arguments
 
 This egg extends the syntax of {{let}} to allow {{define}}-like named
 let forms with optional "rest" arguments.
