@@ -4,4 +4,5 @@
  (version "0.3")
  (category lang-exts)
  (license "MIT")
+ (test-dependencies test)
  (components (extension srfi-5)))
