@@ -148,6 +148,7 @@ Contact: {{wcm at sigwinch dot xyzzy without the zy}}
 ; 0.3 : (2022-04-25) Change maintainer, fix import.
 ; 0.3.1 : (2022-04-26) Egg infrastructure fixes.
 ; 0.3.2 : (2022-04-29) Add tests, rework wiki page.
+; 0.4.0 : (2026-08-14) Port to CHICKEN 6.
 
 === Copyright
 
