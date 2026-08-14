@@ -1,4 +1,4 @@
-(import (chicken base)
+(import (except (scheme base) let)
         (srfi 5)
         test)
 

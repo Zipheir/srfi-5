@@ -1,6 +1,5 @@
 (module srfi-5 (let)
-  (import (rename scheme (let standard-let))
-          (chicken base)
+  (import (rename (scheme base) (let standard-let))
           (chicken platform))
 
   (register-feature! 'srfi-5)
